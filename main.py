@@ -1,5 +1,6 @@
 from flask import Flask, request, redirect, render_template
 import cgi
+import re
 
 app = Flask(__name__)
 app.config['DEBUG'] = True      # displays runtime errors in the browser, too
@@ -33,7 +34,8 @@ def login():
     if ((not verify) or verify == "" or (password and verify != password)) and password:
         verify_error = "Passwords don't match"
 
-    if email and not("@" in email and "." in email and len(email) > 3 and len(email) < 20):
+    # TODO regex
+    if email or not re.match("(<)?(\w+@\w+(?:\.\w+)+)(?(1)>|$)", email):
         email_error = "That's not a valid email"
 
     if username_error == '' and password_error == '' and verify_error == '' and email_error == '':
