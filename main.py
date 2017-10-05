@@ -35,7 +35,7 @@ def login():
         verify_error = "Passwords don't match"
 
     # TODO regex string length
-    if re.match("/\S+@\S+\.\S+/", email) or len(email) < 3 or len(email) > 20:
+    if email and not (re.match("/\S+@\S+\.\S+/", email) or len(email) < 3 or len(email) > 20):
         email_error = "That's not a valid email"
 
     if username_error == '' and password_error == '' and verify_error == '' and email_error == '':
